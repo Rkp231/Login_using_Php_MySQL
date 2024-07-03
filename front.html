@@ -1,0 +1,57 @@
+<html>
+<head>
+	<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	function do_login()
+{
+ var email=$("#emailid").val();
+ var pass=$("#password").val();
+ if(email!="" && pass!="")
+ {
+  //$("#loading_spinner").css({"display":"block"});
+  $.ajax
+  ({
+  type:'post',
+  url:'login.php',
+  data:{
+   do_login:"do_login",
+   email:email,
+   password:pass
+  },
+  success:function(response) {
+  if(response=="success")
+  {
+    window.location.href="index.php";
+  }
+  else
+  {
+    //$("#loading_spinner").css({"display":"none"});
+    alert("Wrong Details");
+  }
+  }
+  });
+ }
+
+ else
+ {
+  alert("Please Fill All The Details");
+ }
+
+ return false;
+}
+</script>
+</head>
+<body>
+
+<h1>LOGIN FORM</h1>
+ 
+ <form method="post" action="login.php" onsubmit="return do_login();">
+  <input type="text" name="emailid" id="emailid" placeholder="Enter Email">
+  <br>
+  <input type="password" name="password" id="password" placeholder="***********">
+  <br>
+  <input type="submit" name="login" value="DO LOGIN" id="login_button">
+ </form>
+
+</body>
+</html>
